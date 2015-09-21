@@ -60,7 +60,7 @@ public class DialogRenderer extends DialogRendererBase {
 			clientKey = clientVarName;
 		}
 
-		encodeLiferayComponentVar(responseWriter, "dialog", clientKey);
+		encodeLiferayComponentVar(responseWriter, clientVarName, clientKey);
 
 		// Prevent scrolling when the show() JavaScript function is called.
 		responseWriter.write("var ");
@@ -73,16 +73,16 @@ public class DialogRenderer extends DialogRendererBase {
 		responseWriter.write(clientKey);
 		responseWriter.write("_scrollx=window.scrollX; ");
 		responseWriter.write(clientKey);
-		responseWriter.write("_scrolly=window.scrollY;},Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("'),'show');");
+		responseWriter.write("_scrolly=window.scrollY;},");
+		responseWriter.write(clientVarName);
+		responseWriter.write(",'show');");
 		responseWriter.write("A.Do.after(function(stuff){window.scrollTo(");
 		responseWriter.write(clientKey);
 		responseWriter.write("_scrollx,");
 		responseWriter.write(clientKey);
-		responseWriter.write("_scrolly);},Liferay.component('");
-		responseWriter.write(clientKey);
-		responseWriter.write("'),'show');");
+		responseWriter.write("_scrolly);},");
+		responseWriter.write(clientVarName);
+		responseWriter.write(",'show');");
 
 		// FACES-2209 remove class="hide" from the "mask" div that is used for modal dialogs
 		// the mask div is placed as the first child of the parent of the dialog
@@ -100,7 +100,9 @@ public class DialogRenderer extends DialogRendererBase {
 		responseWriter.write("_mask.removeClass('hide') }; ");
 
 		if (!dialog.isHideIconRendered()) {
-			responseWriter.write("dialog.removeToolbar('header');");
+
+			responseWriter.write(clientVarName);
+			responseWriter.write(".removeToolbar('header');");
 		}
 
 		// move the overlayBody div into the modal-body div
@@ -109,20 +111,23 @@ public class DialogRenderer extends DialogRendererBase {
 
 		String contentBoxClientId = clientId.concat(CONTENT_BOX_SUFFIX);
 		String escapedContentBoxClientId = escapeClientId(contentBoxClientId);
+		
+
+		responseWriter.write("var modalBody = A.one('div#");
+		responseWriter.write(escapedContentBoxClientId);
+		responseWriter.write(">div.modal-body');");
 
 		responseWriter.write("A.one('#");
 		responseWriter.write(escapedOverlayBodyClientId);
-		responseWriter.write("').appendTo(A.one('div#");
-		responseWriter.write(escapedContentBoxClientId);
-		responseWriter.write(">div.modal-body'));");
+		responseWriter.write("').appendTo(modalBody);");
 
 		if (!dialog.isModal() && dialog.isDismissible()) {
 			encodeOverlayDismissible(responseWriter, dialog, clientKey);
 		}
 
-		JavaScriptFragment dialogJavaScriptFragment = new JavaScriptFragment("dialog");
-		encodeFunctionCall(responseWriter, "LFAI.initDialog", dialogJavaScriptFragment);
 		encodeOverlayJavaScriptCustom(responseWriter, facesContext, dialog, clientKey);
+		JavaScriptFragment clientVarNameJavaScriptFragment = new JavaScriptFragment(clientVarName);
+		encodeFunctionCall(responseWriter, "LFAI.initDialog", 'A', clientVarNameJavaScriptFragment);
 	}
 
 	@Override
@@ -159,6 +164,9 @@ public class DialogRenderer extends DialogRendererBase {
 		if (!dialog.isModal() && dialog.isDismissible()) {
 			modules.add("event-move");
 		}
+
+		modules.add("event-custom");
+		modules.add("datatype-number");
 
 		return modules.toArray(new String[] {});
 	}

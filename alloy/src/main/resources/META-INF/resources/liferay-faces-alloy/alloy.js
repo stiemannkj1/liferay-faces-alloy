@@ -579,7 +579,7 @@ LFAI = {
 		});
 	},
 
-	initDialog: function(dialog) {
+	initDialog: function(A, dialog) {
 
 		var boundingBox = dialog.get('boundingBox'),
 			onceAfterVisibleChangeEventHandle = dialog.after('visibleChange', function(event) {
@@ -594,6 +594,32 @@ LFAI = {
 				boundingBox.setStyle('margin-top', LFAI.getCenteredMargin(height));
 				boundingBox.setStyle('margin-left', LFAI.getCenteredMargin(width));
 				onceAfterVisibleChangeEventHandle.detach();
+			}
+		});
+
+		// https://github.com/liferay/alloy-ui/blob/2.0.x/src/aui-modal/js/aui-modal.js
+		// TODO check if popover needs this too
+		var dialogOnshowEventHandle = dialog.after('visibleChange', function(event) {
+
+			var showing = event.newVal;
+
+			if (showing) {
+
+				var boundingBox = dialog.get('boundingBox');
+
+				dialog.set(
+					'width',
+					A.Number.parse(boundingBox.get('offsetWidth')) -
+					A.Number.parse(boundingBox.getComputedStyle('borderRightWidth'), 10) -
+					A.Number.parse(boundingBox.getComputedStyle('borderLeftWidth'), 10));
+
+				dialog.set(
+					'height',
+					A.Number.parse(boundingBox.get('offsetHeight')) -
+					A.Number.parse(boundingBox.getComputedStyle('borderTopWidth'), 10) -
+					A.Number.parse(boundingBox.getComputedStyle('borderBottomWidth'), 10));
+
+				dialogOnshowEventHandle.detach();
 			}
 		});
 	},
