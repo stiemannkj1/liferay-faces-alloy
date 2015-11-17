@@ -13,6 +13,18 @@
 	<name>Alloy Showcase Webapp</name>
 	<description>This plugin is the Liferay Faces Alloy Showcase demo webapp.</description>
 
+	<properties>
+		<!--
+			Property to enable running tests individually with the following commands:
+
+			mvn clean test -P integration # run all tests
+			mvn clean test -P integration -Dcasperjs.test=test1 # run all tests in test1 folder
+			mvn clean test -P integration -Dcasperjs.test=test1/test1.js # run only test1.js
+			mvn clean test -P integration -Dcasperjs.test=test3.js # run only test3.js
+		-->
+		<casperjs.test></casperjs.test>
+	</properties>
+
 	<profiles>
 		<profile>
 			<id>prettyfaces</id>
@@ -84,7 +96,7 @@
 									<arguments>
 										<argument>test</argument>
 										<argument>--verbose</argument>
-										<argument>${basedir}/src/test/js</argument>
+										<argument>${basedir}/src/test/js/${casperjs.test}</argument>
 									</arguments>
 									<environmentVariables>
 										<PHANTOMJS_EXECUTABLE>${project.build.directory}/test/phantomjs-1.9.8-macosx/bin/phantomjs</PHANTOMJS_EXECUTABLE>
@@ -197,7 +209,7 @@
 										<argument>test</argument>
 										<argument>--engine=slimerjs</argument>
 										<argument>--verbose</argument>
-										<argument>${basedir}/src/test/js</argument>
+										<argument>${basedir}/src/test/js/${casperjs.test}</argument>
 									</arguments>
 									<environmentVariables>
 										<SLIMERJSLAUNCHER>${project.build.directory}/test/slimerjs-0.9.6/xulrunner/xulrunner</SLIMERJSLAUNCHER>
