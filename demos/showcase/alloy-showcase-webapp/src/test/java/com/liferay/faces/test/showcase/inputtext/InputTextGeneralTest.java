@@ -35,7 +35,7 @@ public class InputTextGeneralTest extends InputTextTester {
 		waitForElement(submitButtonXpath);
 		click(submitButtonXpath);
 
-		String successXpath = "//div[@class='alloy-field control-group success']";
+		String successXpath = "//div[@class='alloy-field form-group has-success']";
 		waitForElement(successXpath);
 		assertElementExists(successXpath);
 

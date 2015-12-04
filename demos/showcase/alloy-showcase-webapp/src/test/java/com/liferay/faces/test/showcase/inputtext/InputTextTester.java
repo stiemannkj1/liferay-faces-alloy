@@ -25,7 +25,7 @@ public class InputTextTester {
 	protected static final String modelValueXpath = "//span[contains(@id,':modelValue')]";
 	protected static final String inputXpath = "//input[contains(@id,':text')]";
 	protected static final String submitButtonXpath = "//button[contains(text(),'Submit')]";
-	protected static final String errorXpath = "//span[@class='alloy-message help-inline']";
+	protected static final String errorXpath = "//span[@class='alloy-message help-block']";
 	protected static final String inputXpathRight = "(//input[contains(@id,':text')])[2]";
 	protected static final String submitButtonXpathRight = "(//button[contains(text(),'Submit')])[2]";
 	protected static final String modelValueXpathRight = "(//span[contains(@id,':modelValue')])[2]";

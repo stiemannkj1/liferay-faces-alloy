@@ -30,7 +30,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class AlloyShowcaseTestSuiteUtil {
 
 	private static final WebDriverWait WAIT = new WebDriverWait(Browser.getInstance(), 5);
-	public static final String url = "http://localhost:8080/alloy-showcase-webapp-2.0.0-SNAPSHOT/web/guest/showcase/-/component/alloy/";
+	public static final String url = "http://localhost:8080/alloy-showcase-webapp-3.0.0-SNAPSHOT/web/guest/showcase/-/component/alloy/";
 
 	public static void assertElementExists(String xpath) {
 		assertElementExists("Element " + xpath + " exists.", xpath);
@@ -88,8 +88,4 @@ public class AlloyShowcaseTestSuiteUtil {
 		return Browser.getInstance().findElement(By.xpath(xpath));
 	}
 
-	@BeforeClass
-	public void setUp() {
-		Browser.getInstance().manage();
-	}
 }
