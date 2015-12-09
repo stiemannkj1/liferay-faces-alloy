@@ -30,17 +30,17 @@ public class InputTextGeneralTest extends InputTextTester {
 
 		navigateToURL(inputTextURL + "general");
 
-		// Click the submit button to submit the form with an empty value and assert that the value has been
-		// successfully submitted.
+		// Wait to begin the test until the submit button is rendered.
 		waitForElement(submitButtonXpath);
+
+		// Test that an empty value submits successfully.
 		click(submitButtonXpath);
 
 		String successXpath = "//div[@class='alloy-field form-group has-success']";
 		waitForElement(successXpath);
 		assertElementExists(successXpath);
 
-		// Click the required checkbox, wait for the form to re-render, submit an empty value, and assert that an
-		// error is shown.
+		// Test that the web page shows an error message when a value is required and an empty value is submitted.
 		WebElement successElement = getElement(successXpath);
 		String requiredCheckboxXpath = "//input[contains(@id,':requiredCheckbox')]";
 		click(requiredCheckboxXpath);
@@ -49,7 +49,7 @@ public class InputTextGeneralTest extends InputTextTester {
 		waitForElement(errorXpath);
 		assertElementExists(errorXpath);
 
-		// Enter text in the input, submit the form, and assert that the text appears in the model value.
+		// Test that a text value submits successfully.
 		String text = "Hello World!";
 		sendKeys(inputXpath, text);
 		click(submitButtonXpath);

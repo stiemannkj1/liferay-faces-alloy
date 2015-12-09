@@ -25,7 +25,7 @@ public class AlloyShowcaseTestSuiteListener extends RunListener {
 	@Override
 	public void testRunFinished(Result result) throws Exception {
 
-		Browser.getInstance().close();
+		Browser.getInstance().quit();
 		super.testRunFinished(result);
 	}
 }

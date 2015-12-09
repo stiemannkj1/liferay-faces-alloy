@@ -30,45 +30,43 @@ public class InputTextValidationTest extends InputTextTester {
 
 		navigateToURL(inputTextURL + "validation");
 
+		// Wait to begin the test until the submit button is rendered.
+		waitForElement(submitButtonXpath);
+
+		// Test that the web page shows an error message when an invalid value is submitted.
+		WebElement input = getElement(inputXpath);
+		input.clear();
+
 		String invalidText = "HelloWorldcom";
+		input.sendKeys(invalidText);
+		click(submitButtonXpath);
+		waitForElement(errorXpath);
+		assertElementExists(errorXpath);
+
+		// Test that a valid value submits successfully.
+		input = getElement(inputXpath);
+		input.clear();
+
 		String text = "Hello@World.com";
+		input.sendKeys(text);
+		click(submitButtonXpath);
+		waitForElementText(modelValueXpath, text);
+		assertElementTextExists(modelValueXpath, text);
 
-		{
-			waitForElement(submitButtonXpath);
+		// Test that the web page shows an error message when an invalid value is submitted.
+		input = getElement(inputXpathRight);
+		input.clear();
+		input.sendKeys(invalidText);
+		click(submitButtonXpathRight);
+		waitForElement(errorXpath);
+		assertElementExists(errorXpath);
 
-			WebElement input = getElement(inputXpath);
-			input.clear();
-			input.sendKeys(invalidText);
-			click(submitButtonXpath);
-			waitForElement(errorXpath);
-			assertElementExists(errorXpath);
-		}
-
-		{
-			WebElement input = getElement(inputXpath);
-			input.clear();
-			input.sendKeys(text);
-			click(submitButtonXpath);
-			waitForElementText(modelValueXpath, text);
-			assertElementTextExists(modelValueXpath, text);
-		}
-
-		{
-			WebElement input = getElement(inputXpathRight);
-			input.clear();
-			input.sendKeys(invalidText);
-			click(submitButtonXpathRight);
-			waitForElement(errorXpath);
-			assertElementExists(errorXpath);
-		}
-
-		{
-			WebElement input = getElement(inputXpathRight);
-			input.clear();
-			input.sendKeys(text);
-			click(submitButtonXpathRight);
-			waitForElementText(modelValueXpathRight, text);
-			assertElementTextExists(modelValueXpathRight, text);
-		}
+		// Test that a valid value submits successfully.
+		input = getElement(inputXpathRight);
+		input.clear();
+		input.sendKeys(text);
+		click(submitButtonXpathRight);
+		waitForElementText(modelValueXpathRight, text);
+		assertElementTextExists(modelValueXpathRight, text);
 	}
 }

@@ -30,32 +30,30 @@ public class InputTextImmediateTest extends InputTextTester {
 
 		navigateToURL(inputTextURL + "immediate");
 
+		// Wait to begin the test until the submit button is rendered.
+		waitForElement(submitButtonXpath);
+
+		// Test that the value submits successfully and the valueChangeListener method is called during the
+		// APPLY_REQUEST_VALUES phase.
+		WebElement input = getElement(inputXpath);
 		String text = "Hello World!";
+		input.sendKeys(text);
+		click(submitButtonXpath);
 
-		{
-			waitForElement(submitButtonXpath);
+		String immediateMessage = "//li[@class='text-info'][contains(text(),'APPLY_REQUEST_VALUES')]";
+		waitForElement(immediateMessage);
+		assertElementTextExists(modelValueXpath, text);
+		assertElementExists(immediateMessage);
 
-			WebElement input = getElement(inputXpath);
-			input.clear();
-			input.sendKeys(text);
-			click(submitButtonXpath);
+		// Test that the value submits successfully and the valueChangeListener method is called during the
+		// PROCESS_VALIDATIONS phase.
+		input = getElement(inputXpathRight);
+		input.sendKeys(text);
+		click(submitButtonXpathRight);
 
-			String immediateMessage = "(//li[@class='text-info'])[1]";
-			waitForElement(immediateMessage);
-			assertElementTextExists(modelValueXpath, text);
-			assertElementExists(immediateMessage);
-		}
-
-		{
-			WebElement input = getElement(inputXpathRight);
-			input.clear();
-			input.sendKeys(text);
-			click(submitButtonXpathRight);
-
-			String immediateMessageRight = "(//li[@class='text-info'])[2]";
-			waitForElement(immediateMessageRight);
-			assertElementTextExists(modelValueXpathRight, text);
-			assertElementExists(immediateMessageRight);
-		}
+		String immediateMessageRight = "//li[@class='text-info'][contains(text(),'PROCESS_VALIDATIONS')]";
+		waitForElement(immediateMessageRight);
+		assertElementTextExists(modelValueXpathRight, text);
+		assertElementExists(immediateMessageRight);
 	}
 }

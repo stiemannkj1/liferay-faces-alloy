@@ -30,54 +30,48 @@ public class InputTextConversionTest extends InputTextTester {
 
 		navigateToURL(inputTextURL + "conversion");
 
-		{
-			waitForElement(submitButtonXpath);
+		// Wait to begin the test until the submit button is rendered.
+		waitForElement(submitButtonXpath);
 
-			WebElement input = getElement(inputXpath);
-			input.clear();
+		// Test that the web page shows an error message when an invalid value is submitted.
+		WebElement input = getElement(inputXpath);
+		input.clear();
 
-			String invalidText = "apr 3 33";
-			input.sendKeys(invalidText);
-			click(submitButtonXpath);
-			waitForElement(errorXpath);
-			assertElementExists(errorXpath);
-		}
+		String invalidText = "apr 3 33";
+		input.sendKeys(invalidText);
+		click(submitButtonXpath);
+		waitForElement(errorXpath);
+		assertElementExists(errorXpath);
 
-		{
-			WebElement input = getElement(inputXpath);
-			input.clear();
+		// Test that a valid value submits successfully.
+		input = getElement(inputXpath);
+		input.clear();
 
-			String text = "apr 3, 33";
-			input.sendKeys(text);
-			click(submitButtonXpath);
+		String text = "apr 3, 33";
+		input.sendKeys(text);
+		click(submitButtonXpath);
 
-			String textOutput = "Apr 3, 0033";
-			waitForElementText(modelValueXpath, textOutput);
-			assertElementTextExists(modelValueXpath, textOutput);
-		}
+		String textOutput = "Apr 3, 0033";
+		waitForElementText(modelValueXpath, textOutput);
+		assertElementTextExists(modelValueXpath, textOutput);
 
-		{
-			WebElement input = getElement(inputXpathRight);
-			input.clear();
+		// Test that the web page shows an error message when an invalid value is submitted.
+		input = getElement(inputXpathRight);
+		input.clear();
+		invalidText = "4/333";
+		input.sendKeys(invalidText);
+		click(submitButtonXpathRight);
+		waitForElement(errorXpath);
+		assertElementExists(errorXpath);
 
-			String invalidText = "4/333";
-			input.sendKeys(invalidText);
-			click(submitButtonXpathRight);
-			waitForElement(errorXpath);
-			assertElementExists(errorXpath);
-		}
-
-		{
-			WebElement input = getElement(inputXpathRight);
-			input.clear();
-
-			String text = "4/3/33";
-			input.sendKeys(text);
-			click(submitButtonXpathRight);
-
-			String textOutput = "04/03/0033";
-			waitForElementText(modelValueXpathRight, textOutput);
-			assertElementTextExists(modelValueXpathRight, textOutput);
-		}
+		// Test that a valid value submits successfully.
+		input = getElement(inputXpathRight);
+		input.clear();
+		text = "4/3/33";
+		input.sendKeys(text);
+		click(submitButtonXpathRight);
+		textOutput = "04/03/0033";
+		waitForElementText(modelValueXpathRight, textOutput);
+		assertElementTextExists(modelValueXpathRight, textOutput);
 	}
 }

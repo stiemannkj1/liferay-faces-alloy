@@ -55,6 +55,9 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<configuration>
+					<systemPropertyVariables>
+            			<runningWithMavenSurefirePlugin>true</runningWithMavenSurefirePlugin>
+					</systemPropertyVariables>
 					<properties>
 						<property>
 							<name>listener</name>

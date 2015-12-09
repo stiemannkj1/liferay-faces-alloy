@@ -14,17 +14,18 @@
 package com.liferay.faces.test.showcase.inputtext;
 
 import com.liferay.faces.test.showcase.AlloyShowcaseTestSuiteUtil;
+import com.liferay.faces.test.showcase.TesterBase;
 
 
 /**
  * @author  Kyle Stiemann
  */
-public class InputTextTester {
+public class InputTextTester extends TesterBase {
 
 	protected static final String inputTextURL = AlloyShowcaseTestSuiteUtil.url + "inputtext/";
-	protected static final String modelValueXpath = "//span[contains(@id,':modelValue')]";
-	protected static final String inputXpath = "//input[contains(@id,':text')]";
-	protected static final String submitButtonXpath = "//button[contains(text(),'Submit')]";
+	protected static final String modelValueXpath = "(//span[contains(@id,':modelValue')])[1]";
+	protected static final String inputXpath = "(//input[contains(@id,':text')])[1]";
+	protected static final String submitButtonXpath = "(//button[contains(text(),'Submit')])[1]";
 	protected static final String errorXpath = "//span[@class='alloy-message help-block']";
 	protected static final String inputXpathRight = "(//input[contains(@id,':text')])[2]";
 	protected static final String submitButtonXpathRight = "(//button[contains(text(),'Submit')])[2]";
