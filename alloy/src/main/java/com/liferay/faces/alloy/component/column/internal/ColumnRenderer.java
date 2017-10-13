@@ -45,7 +45,7 @@ import com.liferay.faces.util.render.RendererUtil;
 		@ResourceDependency(library = "liferay-faces-alloy-reslib", name = "build/aui-css/css/bootstrap.min.css")
 	}
 )
-public class ColumnRenderer extends ColumnRendererBase implements ComponentSystemEventListener {
+public class ColumnRenderer extends ColumnRendererCompat implements ComponentSystemEventListener {
 
 	protected static Integer getColumnUnitSize(Integer width) {
 		return (int) Math.round(Column.COLUMNS * ((double) width / 100));
@@ -68,9 +68,6 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 			Column column = (Column) uiComponent;
 			StringBuilder classNames = new StringBuilder();
 
-			String size = column.getSize();
-			size = getColumnCSSClassSize(size);
-
 			Integer span = column.getSpan();
 
 			if (span != null) {
@@ -91,9 +88,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 				span = getColumnUnitSize(width);
 			}
 
-			classNames.append("col-");
-			classNames.append(size);
-			classNames.append("-");
+			classNames.append(getSpanClassNamePrefix(column, false));
 			classNames.append(span);
 
 			Integer offset = column.getOffset();
@@ -118,9 +113,7 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 
 			if (offset != null) {
 				classNames.append(" ");
-				classNames.append("col-");
-				classNames.append(size);
-				classNames.append("-offset-");
+				classNames.append(getSpanClassNamePrefix(column, true));
 				classNames.append(offset);
 			}
 
@@ -150,26 +143,5 @@ public class ColumnRenderer extends ColumnRendererBase implements ComponentSyste
 			RendererUtil.addDefaultAjaxBehavior(column, column.getExecute(), column.getProcess(), "@parent",
 				column.getRender(), column.getUpdate(), "@parent");
 		}
-	}
-
-	private String getColumnCSSClassSize(String size) throws IOException {
-
-		if ("extra-small".equals(size) || "xs".equals(size)) {
-			size = "xs";
-		}
-		else if ("small".equals(size) || "sm".equals(size)) {
-			size = "sm";
-		}
-		else if ("medium".equals(size) || "md".equals(size)) {
-			size = "md";
-		}
-		else if ("large".equals(size) || "lg".equals(size)) {
-			size = "lg";
-		}
-		else {
-			throw new IOException(size + " is not a valid value for size.");
-		}
-
-		return size;
 	}
 }

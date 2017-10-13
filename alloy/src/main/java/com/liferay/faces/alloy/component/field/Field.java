@@ -37,18 +37,12 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Field.COMPONENT_TYPE)
-public class Field extends FieldBase {
-
-	// Private Constants
-	private static final String FORM_GROUP = "form-group";
-	private static final String HAS_ERROR = "has-error";
-	private static final String HAS_WARNING = "has-warning";
-	private static final String HAS_SUCCESS = "has-success";
+public class Field extends FieldCompat {
 
 	@Override
 	public String getStyleClass() {
 
-		String controlGroupCssClass = FORM_GROUP;
+		String controlGroupCssClass = GROUP;
 
 		boolean editableValueHoldersExist = false;
 		boolean editableValueHoldersValid = false;
@@ -105,23 +99,25 @@ public class Field extends FieldBase {
 			PartialViewContext partialViewContext = facesContext.getPartialViewContext();
 
 			if (editableValueHoldersExist && editableValueHoldersValid && partialViewContext.isAjaxRequest()) {
-				controlGroupCssClass = controlGroupCssClass + " " + HAS_SUCCESS;
+				controlGroupCssClass = controlGroupCssClass + " " + SUCCESS;
 			}
 		}
 		else {
 
 			if ((severity == FacesMessage.SEVERITY_FATAL) || (severity == FacesMessage.SEVERITY_ERROR)) {
-				controlGroupCssClass = controlGroupCssClass + " " + HAS_ERROR;
+				controlGroupCssClass = controlGroupCssClass + " " + ERROR;
 			}
 			else if (severity == FacesMessage.SEVERITY_WARN) {
-				controlGroupCssClass = controlGroupCssClass + " " + HAS_WARNING;
+				controlGroupCssClass = controlGroupCssClass + " " + WARNING;
 			}
-			else if (severity == FacesMessage.SEVERITY_INFO) {
-				// no-op Bootstrap 3 does not contain a has-info CSS class
+
+			// Bootstrap 3 does not contain an info CSS class.
+			else if ((INFO != null) && (severity == FacesMessage.SEVERITY_INFO)) {
+				controlGroupCssClass = controlGroupCssClass + " " + INFO;
 			}
 		}
 
-		if (hasSelectBooleanCheckboxChild()) {
+		if (isAppendCheckboxCSSClassName()) {
 			controlGroupCssClass = controlGroupCssClass + " checkbox";
 		}
 
@@ -216,54 +212,5 @@ public class Field extends FieldBase {
 		}
 
 		return severity;
-	}
-
-	private boolean hasSelectBooleanCheckboxChild() {
-
-		boolean hasSelectBooleanCheckboxChild = hasSelectBooleanCheckboxChild(this);
-
-		if (!hasSelectBooleanCheckboxChild) {
-
-			Map<String, UIComponent> facets = getFacets();
-			Set<Entry<String, UIComponent>> entrySet = facets.entrySet();
-
-			for (Entry<String, UIComponent> facetEntry : entrySet) {
-
-				UIComponent uiComponent = facetEntry.getValue();
-
-				if (uiComponent instanceof SelectBooleanCheckbox) {
-
-					hasSelectBooleanCheckboxChild = true;
-
-					break;
-				}
-				else if (uiComponent.getChildCount() > 0) {
-
-					hasSelectBooleanCheckboxChild = hasSelectBooleanCheckboxChild(uiComponent);
-
-					break;
-				}
-			}
-		}
-
-		return hasSelectBooleanCheckboxChild;
-	}
-
-	private boolean hasSelectBooleanCheckboxChild(UIComponent uiComponent) {
-
-		boolean hasSelectBooleanCheckboxChild = false;
-		List<UIComponent> children = uiComponent.getChildren();
-
-		for (UIComponent child : children) {
-
-			if (child instanceof SelectBooleanCheckbox) {
-
-				hasSelectBooleanCheckboxChild = true;
-
-				break;
-			}
-		}
-
-		return hasSelectBooleanCheckboxChild;
 	}
 }

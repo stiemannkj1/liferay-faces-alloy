@@ -13,38 +13,31 @@
  */
 package com.liferay.faces.alloy.component.field.internal;
 
-import java.io.IOException;
 import java.util.List;
 
 import javax.faces.component.UIComponent;
-import javax.faces.component.UIViewRoot;
-import javax.faces.context.FacesContext;
-import javax.faces.context.ResponseWriter;
-import javax.faces.render.FacesRenderer;
 
-import com.liferay.faces.alloy.component.field.Field;
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
 
 
 /**
  * @author  Kyle Stiemann
  */
-@FacesRenderer(componentFamily = Field.COMPONENT_FAMILY, rendererType = Field.RENDERER_TYPE)
-public class FieldRenderer extends FieldRendererCompat {
+public abstract class FieldRendererCompat extends FieldRendererBase {
 
-	@Override
-	protected UIComponent getSelectBooleanCheckboxChild(List<UIComponent> children) {
+	protected abstract UIComponent getSelectBooleanCheckboxChild(List<UIComponent> children);
+
+	private UIComponent getSelectBooleanCheckboxLabelFacetChild(UIComponent labelFacet) {
 
 		UIComponent selectBooleanCheckboxChild = null;
 
-		for (UIComponent child : children) {
+		if (labelFacet instanceof SelectBooleanCheckbox) {
+			selectBooleanCheckboxChild = labelFacet;
+		}
+		else if (labelFacet.getChildCount() > 0) {
 
-			if (child instanceof SelectBooleanCheckbox) {
-
-				selectBooleanCheckboxChild = child;
-
-				break;
-			}
+			List<UIComponent> children = labelFacet.getChildren();
+			selectBooleanCheckboxChild = getSelectBooleanCheckboxChild(children);
 		}
 
 		return selectBooleanCheckboxChild;
