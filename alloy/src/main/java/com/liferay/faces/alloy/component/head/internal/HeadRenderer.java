@@ -20,9 +20,15 @@ import java.util.Map;
 import javax.faces.application.ResourceDependencies;
 import javax.faces.application.ResourceDependency;
 import javax.faces.component.UIComponent;
+import javax.faces.component.UIComponentBase;
 import javax.faces.component.UIViewRoot;
 import javax.faces.context.FacesContext;
 import javax.faces.context.ResponseWriter;
+import javax.faces.event.AbortProcessingException;
+import javax.faces.event.ComponentSystemEvent;
+import javax.faces.event.ComponentSystemEventListener;
+import javax.faces.event.ListenerFor;
+import javax.faces.event.PostAddToViewEvent;
 import javax.faces.render.FacesRenderer;
 
 import com.liferay.faces.alloy.component.head.Head;
@@ -46,47 +52,65 @@ import com.liferay.faces.util.product.ProductFactory;
 		}
 	)
 //J+
-public class HeadRenderer extends HeadRendererBase {
+@ListenerFor(systemEventClass = PostAddToViewEvent.class, sourceClass = Head.class)
+public class HeadRenderer extends HeadRendererBase implements ComponentSystemEventListener {
 
 	// Private Constants
 	private static final boolean LIFERAY_PORTAL_DETECTED = ProductFactory.getProduct(Product.Name.LIFERAY_PORTAL)
 		.isDetected();
 
 	@Override
-	public void encodeChildren(FacesContext facesContext, UIComponent uiComponent) throws IOException {
+	public void processEvent(ComponentSystemEvent componentSystemEvent) throws AbortProcessingException {
 
 		// If Liferay Portal is not detected and bootstrap-responsive.min.css is present in the <head>...</head>
 		// element, then encode a meta tag as a child of the head that will cause bootstrap to behave responsively.
 		if (!LIFERAY_PORTAL_DETECTED) {
 
+			FacesContext facesContext = FacesContext.getCurrentInstance();
 			UIViewRoot uiViewRoot = facesContext.getViewRoot();
 			List<UIComponent> componentResources = uiViewRoot.getComponentResources(facesContext, "head");
 
 			for (UIComponent componentResource : componentResources) {
 
-				Map<String, Object> attributes = componentResource.getAttributes();
-				String library = (String) attributes.get("library");
-				String name = (String) attributes.get("name");
+				Map<String, Object> componentResourceAttributes = componentResource.getAttributes();
+				String library = (String) componentResourceAttributes.get("library");
+				String name = (String) componentResourceAttributes.get("name");
 
+				// TODO never happens (responsive is never there when PostAddToViewEvent occurs)
 				if ("liferay-faces-alloy-reslib".equals(library) &&
 						"build/aui-css/css/bootstrap-responsive.min.css".equals(name)) {
 
-					ResponseWriter responseWriter = facesContext.getResponseWriter();
-					responseWriter.startElement("meta", null);
-					responseWriter.writeAttribute("name", "viewport", null);
-					responseWriter.writeAttribute("content", "width=device-width,initial-scale=1", null);
-					responseWriter.endElement("meta");
+					ResponsiveMetadata responsiveMetadata = new ResponsiveMetadata();
+					Map<String, Object> responsiveMetadataAttributes = responsiveMetadata.getAttributes();
+					responsiveMetadataAttributes.put("name", ResponsiveMetadata.COMPONENT_FAMILY);
+					uiViewRoot.addComponentResource(facesContext, responsiveMetadata);
 
 					break;
 				}
 			}
 		}
-
-		super.encodeChildren(facesContext, uiComponent);
 	}
 
-	@Override
-	public boolean getRendersChildren() {
-		return true;
+	public static class ResponsiveMetadata extends UIComponentBase {
+
+		// Private Constants
+		private static final String COMPONENT_FAMILY = "com.liferay.faces.alloy.component.internal.responsive.metadata";
+
+		@Override
+		public void encodeEnd(FacesContext facesContext) throws IOException {
+
+			ResponseWriter responseWriter = facesContext.getResponseWriter();
+			responseWriter.startElement("meta", this);
+			responseWriter.writeAttribute("name", "viewport", null);
+			responseWriter.writeAttribute("content", "width=device-width,initial-scale=1", null);
+			responseWriter.endElement("meta");
+
+			super.encodeEnd(facesContext);
+		}
+
+		@Override
+		public String getFamily() {
+			return COMPONENT_FAMILY;
+		}
 	}
 }
