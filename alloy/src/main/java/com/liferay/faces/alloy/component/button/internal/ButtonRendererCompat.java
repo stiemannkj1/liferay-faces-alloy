@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -16,11 +16,11 @@ package com.liferay.faces.alloy.component.button.internal;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIParameter;
 import javax.faces.component.UIViewParameter;
+import javax.faces.context.FacesContext;
 
+import com.liferay.faces.alloy.util.internal.JSFUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductFactory;
 import com.liferay.faces.util.render.DelegatingRendererBase;
 
 
@@ -31,14 +31,13 @@ import com.liferay.faces.util.render.DelegatingRendererBase;
  */
 public abstract class ButtonRendererCompat extends DelegatingRendererBase {
 
-	// Private Constants
-	private static final Product JSF = ProductFactory.getProduct(Product.Name.JSF);
-	private static final Class<?> UI_VIEW_ACTION_CLASS;
-
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(ButtonRendererCompat.class);
 
-	static {
+	// Private Final Data Members
+	private final Class<?> uiViewActionClass;
+
+	public ButtonRendererCompat() {
 
 		Class<?> clazz = null;
 
@@ -47,30 +46,27 @@ public abstract class ButtonRendererCompat extends DelegatingRendererBase {
 		}
 		catch (ClassNotFoundException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = FacesContext.getCurrentInstance();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
 
-		UI_VIEW_ACTION_CLASS = clazz;
-	}
-
-	protected static boolean isFaces_2_2_OrNewer() {
-
-		return JSF.isDetected() &&
-			((JSF.getMajorVersion() > 2) || ((JSF.getMajorVersion() == 2) && (JSF.getMinorVersion() >= 2)));
+		uiViewActionClass = clazz;
 	}
 
 	protected boolean isVisualComponent(UIComponent uiComponent) {
 
-		if (UI_VIEW_ACTION_CLASS == null) {
+		if (uiViewActionClass == null) {
 			return (!(uiComponent instanceof UIParameter)) || (!(uiComponent instanceof UIViewParameter));
 		}
 		else {
+
 			Class<? extends UIComponent> uiComponentClass = uiComponent.getClass();
 
 			return (!(uiComponent instanceof UIParameter)) ||
-				(!(uiComponentClass.isAssignableFrom(UI_VIEW_ACTION_CLASS))) ||
+				(!(uiComponentClass.isAssignableFrom(uiViewActionClass))) ||
 				(!(uiComponent instanceof UIViewParameter));
 		}
 	}

@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,11 +17,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.alloy.component.link.LinkBase;
+import com.liferay.faces.alloy.util.internal.JSFUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductFactory;
 
 
 /**
@@ -34,9 +35,6 @@ public abstract class SplitButtonCompat extends LinkBase {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(SplitButtonCompat.class);
 
-	// Private Constants
-	private static final Product JSF = ProductFactory.getProduct(Product.Name.JSF);
-
 	// Private Data Members
 	private boolean disableClientWindow;
 	private Map<String, Object> passThroughAttributes;
@@ -45,6 +43,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 	// Protected Data Members
 	protected Button wrappedButton;
 
+	@Override
 	public Map<String, Object> getPassThroughAttributes(boolean create) {
 
 		if (passThroughAttributes == null) {
@@ -60,7 +59,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -79,6 +80,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 		return passThroughAttributes;
 	}
 
+	@Override
 	public String getRole() {
 
 		Method getRoleMethod = null;
@@ -90,7 +92,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -108,6 +112,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 		return role;
 	}
 
+	@Override
 	public boolean isDisableClientWindow() {
 
 		Method isDisableClientWindowMethod = null;
@@ -118,7 +123,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -136,6 +143,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 		return disableClientWindow;
 	}
 
+	@Override
 	public void resetValue() {
 
 		Method resetValueMethod = null;
@@ -146,7 +154,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -162,6 +172,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 	}
 
+	@Override
 	public void setDisableClientWindow(boolean disableClientWindow) {
 
 		Method setDisableClientWindowMethod = null;
@@ -173,7 +184,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -192,6 +205,7 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 	}
 
+	@Override
 	public void setRole(String role) {
 
 		Method setRoleMethod = null;
@@ -203,7 +217,9 @@ public abstract class SplitButtonCompat extends LinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -220,11 +236,5 @@ public abstract class SplitButtonCompat extends LinkBase {
 				logger.error(e);
 			}
 		}
-	}
-
-	protected boolean isFaces_2_2_OrNewer() {
-
-		return JSF.isDetected() &&
-			((JSF.getMajorVersion() > 2) || ((JSF.getMajorVersion() == 2) && (JSF.getMinorVersion() >= 2)));
 	}
 }

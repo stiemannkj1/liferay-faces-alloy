@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -31,7 +31,6 @@ import javax.faces.view.facelets.TagHandler;
 import com.liferay.faces.alloy.config.internal.AlloyWebConfigParam;
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
-import com.liferay.faces.util.config.WebConfigParam;
 import com.liferay.faces.util.jsp.JspTagConfig;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -46,9 +45,6 @@ public class LoadConstants extends TagHandler {
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(LoadConstants.class);
 
-	// Static field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
-	private static volatile Cache<String, Map<String, Object>> constantCache;
-
 	// Protected Enumerations
 	protected enum PropertyKeys {
 		cacheable, classType, var
@@ -58,6 +54,9 @@ public class LoadConstants extends TagHandler {
 	private boolean cacheable = true;
 	private String classType;
 	private String var;
+
+	// Private field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
+	private volatile Cache<String, Map<String, Object>> constantCache;
 
 	// Workaround for https://issues.liferay.com/browse/FACES-1576
 	public LoadConstants() throws Exception {
@@ -94,14 +93,14 @@ public class LoadConstants extends TagHandler {
 	@Override
 	public void apply(FaceletContext faceletContext, UIComponent parentUIComponent) throws IOException {
 
-		Cache<String, Map<String, Object>> constantCache = LoadConstants.constantCache;
+		Cache<String, Map<String, Object>> constantCache = this.constantCache;
 
 		// First check without locking (not yet thread-safe)
 		if (cacheable && (constantCache == null)) {
 
-			synchronized (LoadConstants.class) {
+			synchronized (this) {
 
-				constantCache = LoadConstants.constantCache;
+				constantCache = this.constantCache;
 
 				// Second check with locking (thread-safe)
 				if (constantCache == null) {
@@ -114,12 +113,12 @@ public class LoadConstants extends TagHandler {
 							externalContext);
 
 					if (maxCacheCapacity > -1) {
-						constantCache = LoadConstants.constantCache = CacheFactory.getConcurrentLRUCacheInstance(
-									externalContext, initialCacheCapacity, maxCacheCapacity);
+						constantCache = this.constantCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext,
+									initialCacheCapacity, maxCacheCapacity);
 					}
 					else {
-						constantCache = LoadConstants.constantCache = CacheFactory.getConcurrentCacheInstance(
-									externalContext, initialCacheCapacity);
+						constantCache = this.constantCache = CacheFactory.getConcurrentCacheInstance(externalContext,
+									initialCacheCapacity);
 					}
 				}
 			}

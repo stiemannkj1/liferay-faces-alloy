@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2017 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2018 Liferay, Inc. All rights reserved.
  *
  * This library is free software; you can redistribute it and/or modify it under
  * the terms of the GNU Lesser General Public License as published by the Free
@@ -17,11 +17,12 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.faces.context.FacesContext;
+
 import com.liferay.faces.alloy.component.commandlink.CommandLinkBase;
+import com.liferay.faces.alloy.util.internal.JSFUtil;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
-import com.liferay.faces.util.product.Product;
-import com.liferay.faces.util.product.ProductFactory;
 
 
 /**
@@ -33,9 +34,6 @@ public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 
 	// Logger
 	private static final Logger logger = LoggerFactory.getLogger(SplitCommandButtonCompat.class);
-
-	// Private Constants
-	private static final Product JSF = ProductFactory.getProduct(Product.Name.JSF);
 
 	// Private Data Members
 	private Map<String, Object> passThroughAttributes;
@@ -59,7 +57,9 @@ public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -89,7 +89,9 @@ public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -118,7 +120,9 @@ public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 		}
 		catch (NoSuchMethodException e) {
 
-			if (isFaces_2_2_OrNewer()) {
+			FacesContext facesContext = getFacesContext();
+
+			if (JSFUtil.isFaces_2_2_OrNewer(facesContext)) {
 				logger.error(e);
 			}
 		}
@@ -135,11 +139,5 @@ public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 				logger.error(e);
 			}
 		}
-	}
-
-	protected boolean isFaces_2_2_OrNewer() {
-
-		return JSF.isDetected() &&
-			((JSF.getMajorVersion() > 2) || ((JSF.getMajorVersion() == 2) && (JSF.getMinorVersion() >= 2)));
 	}
 }
