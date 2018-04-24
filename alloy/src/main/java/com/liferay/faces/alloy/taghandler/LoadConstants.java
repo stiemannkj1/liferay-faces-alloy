@@ -32,6 +32,7 @@ import com.liferay.faces.alloy.config.internal.AlloyWebConfigParam;
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.cache.CacheFactory;
 import com.liferay.faces.util.jsp.JspTagConfig;
+import com.liferay.faces.util.lang.OnDemand;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -55,8 +56,8 @@ public class LoadConstants extends TagHandler {
 	private String classType;
 	private String var;
 
-	// Private field must be declared volatile in order for the double-check idiom to work (requires JRE 1.5+)
-	private volatile Cache<String, Map<String, Object>> constantCache;
+	// Private Final Data Members
+	private final OnDemandConstantCache onDemandConstantCache = new OnDemandConstantCache();
 
 	// Workaround for https://issues.liferay.com/browse/FACES-1576
 	public LoadConstants() throws Exception {
@@ -93,36 +94,7 @@ public class LoadConstants extends TagHandler {
 	@Override
 	public void apply(FaceletContext faceletContext, UIComponent parentUIComponent) throws IOException {
 
-		Cache<String, Map<String, Object>> constantCache = this.constantCache;
-
-		// First check without locking (not yet thread-safe)
-		if (cacheable && (constantCache == null)) {
-
-			synchronized (this) {
-
-				constantCache = this.constantCache;
-
-				// Second check with locking (thread-safe)
-				if (constantCache == null) {
-
-					FacesContext facesContext = faceletContext.getFacesContext();
-					ExternalContext externalContext = facesContext.getExternalContext();
-					int initialCacheCapacity = AlloyWebConfigParam.AlloyLoadConstantsInitialCacheCapacity
-						.getIntegerValue(externalContext);
-					int maxCacheCapacity = AlloyWebConfigParam.AlloyLoadConstantsMaxCacheCapacity.getIntegerValue(
-							externalContext);
-
-					if (maxCacheCapacity > -1) {
-						constantCache = this.constantCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext,
-									initialCacheCapacity, maxCacheCapacity);
-					}
-					else {
-						constantCache = this.constantCache = CacheFactory.getConcurrentCacheInstance(externalContext,
-									initialCacheCapacity);
-					}
-				}
-			}
-		}
+		Cache<String, Map<String, Object>> constantCache = onDemandConstantCache.get(faceletContext);
 
 		if (cacheable && constantCache.containsKey(classType)) {
 			faceletContext.setAttribute(var, constantCache.getValue(classType));
@@ -168,6 +140,32 @@ public class LoadConstants extends TagHandler {
 			catch (IllegalAccessException e) {
 				logger.error(e);
 			}
+		}
+	}
+
+	private static final class OnDemandConstantCache
+		extends OnDemand<Cache<String, Map<String, Object>>, FaceletContext> {
+
+		@Override
+		protected Cache<String, Map<String, Object>> computeInitialValue(FaceletContext faceletContext) {
+
+			Cache<String, Map<String, Object>> constantCache;
+			FacesContext facesContext = faceletContext.getFacesContext();
+			ExternalContext externalContext = facesContext.getExternalContext();
+			int initialCacheCapacity = AlloyWebConfigParam.AlloyLoadConstantsInitialCacheCapacity.getIntegerValue(
+					externalContext);
+			int maxCacheCapacity = AlloyWebConfigParam.AlloyLoadConstantsMaxCacheCapacity.getIntegerValue(
+					externalContext);
+
+			if (maxCacheCapacity > -1) {
+				constantCache = CacheFactory.getConcurrentLRUCacheInstance(externalContext, initialCacheCapacity,
+						maxCacheCapacity);
+			}
+			else {
+				constantCache = CacheFactory.getConcurrentCacheInstance(externalContext, initialCacheCapacity);
+			}
+
+			return constantCache;
 		}
 	}
 }
