@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.body;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Body.COMPONENT_TYPE)
+@ConsumerType
 public class Body extends BodyBase {
 	// Initial Generation
 }

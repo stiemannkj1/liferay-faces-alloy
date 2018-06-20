@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.dataitem;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = DataItem.COMPONENT_TYPE)
+@ConsumerType
 public class DataItem extends DataItemBase {
 	// Initial Generation
 }

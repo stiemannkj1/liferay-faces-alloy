@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component.messages;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.component.ComponentUtil;
 
 
@@ -22,6 +24,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Neil Griffin
  */
 @FacesComponent(value = Messages.COMPONENT_TYPE)
+@ConsumerType
 public class Messages extends MessagesBase {
 
 	// Private Constants

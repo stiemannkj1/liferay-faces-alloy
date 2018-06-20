@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.outputlink;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputLink.COMPONENT_TYPE)
+@ConsumerType
 public class OutputLink extends OutputLinkBase {
 	// Initial Generation
 }

@@ -27,12 +27,15 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = ProgressBar.COMPONENT_TYPE)
+@ConsumerType
 public class ProgressBar extends ProgressBarBase implements ClientBehaviorHolder {
 
 	// Private Constants

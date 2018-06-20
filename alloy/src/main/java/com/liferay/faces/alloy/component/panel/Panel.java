@@ -15,12 +15,15 @@ package com.liferay.faces.alloy.component.panel;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Panel.COMPONENT_TYPE)
+@ConsumerType
 public class Panel extends PanelBase {
 	// Initial Generation
 }

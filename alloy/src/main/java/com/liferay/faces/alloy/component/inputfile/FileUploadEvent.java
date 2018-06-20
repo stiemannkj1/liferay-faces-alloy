@@ -18,12 +18,15 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.FacesListener;
 import javax.faces.event.PhaseId;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.model.UploadedFile;
 
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class FileUploadEvent extends FacesEvent {
 
 	// serialVersionUID

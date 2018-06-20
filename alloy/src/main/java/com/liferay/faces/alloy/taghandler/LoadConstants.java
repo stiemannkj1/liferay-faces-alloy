@@ -28,6 +28,8 @@ import javax.faces.view.facelets.TagAttribute;
 import javax.faces.view.facelets.TagConfig;
 import javax.faces.view.facelets.TagHandler;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.cache.Cache;
 import com.liferay.faces.util.jsp.JspTagConfig;
 import com.liferay.faces.util.lang.ThreadSafeAccessor;
@@ -39,6 +41,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Neil Griffin
  * @author  Kyle Stiemann
  */
+@ConsumerType
 public class LoadConstants extends TagHandler {
 
 	// Logger

@@ -19,12 +19,15 @@ import javax.annotation.Generated;
 import com.liferay.faces.util.component.ClientComponent;
 import com.liferay.faces.util.component.Styleable;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class InputFileBase extends com.liferay.faces.util.component.InputFileBase implements Styleable, ClientComponent {
 
 	// Public Constants

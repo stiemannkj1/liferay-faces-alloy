@@ -17,12 +17,15 @@ package com.liferay.faces.alloy.component.outputstylesheet;
 import javax.annotation.Generated;
 import javax.faces.component.UIOutput;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class OutputStylesheetBase extends UIOutput {
 
 	// Public Constants

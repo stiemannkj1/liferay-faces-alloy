@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.selectstarrating;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectStarRating.COMPONENT_TYPE)
+@ConsumerType
 public class SelectStarRating extends SelectStarRatingBase {
 	// Initial Generation
 }

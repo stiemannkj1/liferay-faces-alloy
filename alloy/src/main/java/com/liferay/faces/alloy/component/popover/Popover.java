@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.popover;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Popover.COMPONENT_TYPE)
+@ConsumerType
 public class Popover extends PopoverBase {
 
 	@Override

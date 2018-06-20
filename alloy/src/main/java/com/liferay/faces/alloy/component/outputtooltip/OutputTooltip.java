@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.outputtooltip;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputTooltip.COMPONENT_TYPE)
+@ConsumerType
 public class OutputTooltip extends OutputTooltipBase {
 
 	@Override

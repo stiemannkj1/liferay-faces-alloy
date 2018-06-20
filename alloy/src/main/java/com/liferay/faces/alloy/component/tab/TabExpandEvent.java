@@ -18,10 +18,13 @@ import javax.faces.component.behavior.Behavior;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.PhaseId;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
+@ProviderType
 public class TabExpandEvent extends AjaxBehaviorEvent {
 
 	// Public Constants

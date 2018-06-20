@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.row;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Row.COMPONENT_TYPE)
+@ConsumerType
 public class Row extends RowBase {
 	// Initial Generation
 }

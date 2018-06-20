@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.selectonelistbox;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectOneListbox.COMPONENT_TYPE)
+@ConsumerType
 public class SelectOneListbox extends SelectOneListboxBase {
 	// Initial Generation
 }

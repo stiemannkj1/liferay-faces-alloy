@@ -35,6 +35,8 @@ import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
@@ -43,6 +45,7 @@ import com.liferay.faces.util.i18n.I18nFactory;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = AutoComplete.COMPONENT_TYPE)
+@ConsumerType
 public class AutoComplete extends AutoCompleteBase implements ClientBehaviorHolder {
 
 	public final List<String> getAllItems(FacesContext facesContext) {

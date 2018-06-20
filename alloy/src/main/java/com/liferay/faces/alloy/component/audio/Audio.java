@@ -15,12 +15,15 @@ package com.liferay.faces.alloy.component.audio;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Audio.COMPONENT_TYPE)
+@ConsumerType
 public class Audio extends AudioBase {
 	// Initial Generation
 }

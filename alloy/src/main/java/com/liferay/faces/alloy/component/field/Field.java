@@ -29,6 +29,8 @@ import javax.faces.component.UIMessage;
 import javax.faces.context.FacesContext;
 import javax.faces.context.PartialViewContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.alloy.component.selectbooleancheckbox.SelectBooleanCheckbox;
 import com.liferay.faces.util.component.ComponentUtil;
 
@@ -37,6 +39,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Field.COMPONENT_TYPE)
+@ConsumerType
 public class Field extends FieldBase {
 
 	// Private Constants

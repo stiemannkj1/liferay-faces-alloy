@@ -18,6 +18,8 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.html.HtmlInputText;
 import javax.faces.component.html.HtmlInputTextarea;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
 
@@ -26,6 +28,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputRemainingChars.COMPONENT_TYPE)
+@ConsumerType
 public class OutputRemainingChars extends OutputRemainingCharsBase {
 
 	// Logger

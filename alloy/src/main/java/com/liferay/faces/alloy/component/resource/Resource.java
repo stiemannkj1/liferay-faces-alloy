@@ -15,12 +15,15 @@ package com.liferay.faces.alloy.component.resource;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Resource.COMPONENT_TYPE)
+@ConsumerType
 public class Resource extends ResourceBase {
 	// Initial Generation
 }

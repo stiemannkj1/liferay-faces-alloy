@@ -30,6 +30,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.helper.IntegerHelper;
 
 
@@ -37,6 +39,7 @@ import com.liferay.faces.util.helper.IntegerHelper;
  * @author  Neil Griffin
  */
 @FacesComponent(value = DataTable.COMPONENT_TYPE)
+@ConsumerType
 public class DataTable extends DataTableBase implements ClientBehaviorHolder {
 
 	// Private Constants

@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.dialog;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Dialog.COMPONENT_TYPE)
+@ConsumerType
 public class Dialog extends DialogBase {
 
 	@Override

@@ -13,6 +13,8 @@
  */
 package com.liferay.faces.alloy.component.media;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.component.Styleable;
 
 
@@ -20,6 +22,7 @@ import com.liferay.faces.util.component.Styleable;
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
+@ProviderType
 public abstract class Media extends MediaBase implements Styleable {
 	// Initial Generation
 }

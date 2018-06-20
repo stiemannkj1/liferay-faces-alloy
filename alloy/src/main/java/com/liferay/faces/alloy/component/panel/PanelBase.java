@@ -19,12 +19,15 @@ import com.liferay.faces.alloy.component.panelgroup.PanelGroupBlockLayout;
 
 import com.liferay.faces.util.component.Styleable;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class PanelBase extends PanelGroupBlockLayout implements Styleable {
 
 	// Public Constants

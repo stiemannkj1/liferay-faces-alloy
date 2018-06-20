@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.selectthumbrating;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectThumbRating.COMPONENT_TYPE)
+@ConsumerType
 public final class SelectThumbRating extends SelectThumbRatingBase {
 	// Initial Generation
 }

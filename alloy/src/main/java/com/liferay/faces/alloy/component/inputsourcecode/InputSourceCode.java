@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.inputsourcecode;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = InputSourceCode.COMPONENT_TYPE)
+@ConsumerType
 public class InputSourceCode extends InputSourceCodeBase {
 
 	@Override

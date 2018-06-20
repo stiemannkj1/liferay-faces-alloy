@@ -21,11 +21,14 @@ import javax.faces.component.FacesComponent;
 import javax.faces.component.UIComponent;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Column.COMPONENT_TYPE)
+@ConsumerType
 public class Column extends ColumnBase implements ClientBehaviorHolder {
 
 	// Public Constants

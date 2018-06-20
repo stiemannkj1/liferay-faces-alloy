@@ -19,12 +19,15 @@ import javax.faces.component.html.HtmlOutputFormat;
 
 import com.liferay.faces.util.component.Styleable;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class OutputFormatBase extends HtmlOutputFormat implements Styleable {
 
 	// Public Constants

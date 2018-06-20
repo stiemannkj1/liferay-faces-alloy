@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.commandbutton;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = CommandButton.COMPONENT_TYPE)
+@ConsumerType
 public class CommandButton extends CommandButtonBase {
 	// Initial Generation
 }

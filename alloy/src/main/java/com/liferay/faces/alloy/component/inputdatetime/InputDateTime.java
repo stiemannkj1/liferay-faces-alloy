@@ -27,6 +27,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.DateTimeConverter;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 
@@ -34,6 +36,7 @@ import com.liferay.faces.util.i18n.I18nFactory;
 /**
  * @author  Kyle Stiemann
  */
+@ProviderType
 public abstract class InputDateTime extends InputDateTimeBase {
 
 	public abstract String getPattern();

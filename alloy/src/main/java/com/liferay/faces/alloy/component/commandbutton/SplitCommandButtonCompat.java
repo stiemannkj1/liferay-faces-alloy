@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component.commandbutton;
 
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.alloy.component.commandlink.CommandLinkBase;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -25,6 +27,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class SplitCommandButtonCompat extends CommandLinkBase {
 
 	// Logger

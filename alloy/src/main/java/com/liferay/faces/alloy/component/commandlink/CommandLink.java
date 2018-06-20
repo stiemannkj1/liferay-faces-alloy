@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.commandlink;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = CommandLink.COMPONENT_TYPE)
+@ConsumerType
 public class CommandLink extends CommandLinkBase {
 	// Initial Generation
 }

@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.inputsecret;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = InputSecret.COMPONENT_TYPE)
+@ConsumerType
 public class InputSecret extends InputSecretBase {
 	// Initial Generation
 }

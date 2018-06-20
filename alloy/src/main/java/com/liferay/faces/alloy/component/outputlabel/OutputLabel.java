@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.outputlabel;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputLabel.COMPONENT_TYPE)
+@ConsumerType
 public class OutputLabel extends OutputLabelBase {
 	// Initial Generation
 }

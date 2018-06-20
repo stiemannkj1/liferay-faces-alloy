@@ -17,12 +17,15 @@ package com.liferay.faces.alloy.component.inputhidden;
 import javax.annotation.Generated;
 import javax.faces.component.html.HtmlInputHidden;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class InputHiddenBase extends HtmlInputHidden {
 
 	// Public Constants

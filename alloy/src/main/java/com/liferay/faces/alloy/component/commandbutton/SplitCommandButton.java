@@ -37,12 +37,15 @@ import javax.faces.event.FacesEvent;
 import javax.faces.event.SystemEvent;
 import javax.faces.event.SystemEventListener;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.component.ComponentUtil;
 
 
 /**
  * @author  Vernon Singleton
  */
+@ConsumerType
 public class SplitCommandButton extends SplitCommandButtonCompat {
 
 	// Public Constants

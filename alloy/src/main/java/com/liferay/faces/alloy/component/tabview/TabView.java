@@ -27,6 +27,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabSelectEvent;
 import com.liferay.faces.alloy.component.tab.TabUtil;
@@ -37,6 +39,7 @@ import com.liferay.faces.util.helper.IntegerHelper;
  * @author  Neil Griffin
  */
 @FacesComponent(value = TabView.COMPONENT_TYPE)
+@ConsumerType
 public class TabView extends TabViewBase implements ClientBehaviorHolder {
 
 	// Private Constants

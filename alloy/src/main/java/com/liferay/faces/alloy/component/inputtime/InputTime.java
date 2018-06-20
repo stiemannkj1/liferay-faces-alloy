@@ -22,6 +22,8 @@ import javax.faces.FacesException;
 import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.client.BrowserSniffer;
 import com.liferay.faces.util.client.BrowserSnifferFactory;
 
@@ -31,6 +33,7 @@ import com.liferay.faces.util.client.BrowserSnifferFactory;
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = InputTime.COMPONENT_TYPE)
+@ConsumerType
 public class InputTime extends InputTimeBase {
 
 	// Public Constants

@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.inputtext;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = InputText.COMPONENT_TYPE)
+@ConsumerType
 public class InputText extends InputTextBase {
 	// Initial Generation
 }

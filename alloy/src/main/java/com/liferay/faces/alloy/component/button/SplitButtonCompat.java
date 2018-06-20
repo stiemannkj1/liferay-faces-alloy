@@ -15,6 +15,8 @@ package com.liferay.faces.alloy.component.button;
 
 import java.util.Map;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 import com.liferay.faces.alloy.component.link.LinkBase;
 import com.liferay.faces.util.logging.Logger;
 import com.liferay.faces.util.logging.LoggerFactory;
@@ -25,6 +27,7 @@ import com.liferay.faces.util.logging.LoggerFactory;
  *
  * @author  Neil Griffin
  */
+@ProviderType
 public abstract class SplitButtonCompat extends LinkBase {
 
 	// Logger

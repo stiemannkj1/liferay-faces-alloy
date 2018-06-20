@@ -25,6 +25,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AbortProcessingException;
 import javax.faces.event.FacesEvent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.i18n.I18n;
 import com.liferay.faces.util.i18n.I18nFactory;
 import com.liferay.faces.util.logging.Logger;
@@ -36,6 +38,7 @@ import com.liferay.faces.util.model.UploadedFile;
  * @author  Neil Griffin
  */
 @FacesComponent(value = InputFile.COMPONENT_TYPE)
+@ConsumerType
 public class InputFile extends InputFileBase {
 
 	// Logger

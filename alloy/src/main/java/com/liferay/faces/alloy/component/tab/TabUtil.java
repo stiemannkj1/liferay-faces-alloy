@@ -19,11 +19,18 @@ import java.util.List;
 import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author  Neil Griffin
  */
-public class TabUtil {
+@ProviderType
+public final class TabUtil {
+
+	private TabUtil() {
+		throw new AssertionError();
+	}
 
 	public static List<Tab> getChildTabs(UIData uiData) {
 

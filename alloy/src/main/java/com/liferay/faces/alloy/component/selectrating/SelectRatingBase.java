@@ -19,12 +19,15 @@ import com.liferay.faces.alloy.component.selectoneradio.SelectOneRadioBase;
 
 import com.liferay.faces.util.component.ClientComponent;
 
+import org.osgi.annotation.versioning.ProviderType;
+
 
 /**
  * @author	Bruno Basto
  * @author	Kyle Stiemann
  */
 @Generated(value = "com.liferay.alloy.tools.builder.FacesBuilder")
+@ProviderType
 public abstract class SelectRatingBase extends SelectOneRadioBase implements ClientComponent {
 
 	// Public Constants

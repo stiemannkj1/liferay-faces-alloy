@@ -20,6 +20,8 @@ import javax.faces.component.UIData;
 import javax.faces.model.DataModel;
 import javax.faces.render.Renderer;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.alloy.component.tabview.TabView;
 
 
@@ -45,6 +47,7 @@ import com.liferay.faces.alloy.component.tabview.TabView;
  * @author  Neil Griffin
  */
 @FacesComponent(value = Tab.COMPONENT_TYPE)
+@ConsumerType
 public class Tab extends TabBase {
 	// Initial Generation
 }

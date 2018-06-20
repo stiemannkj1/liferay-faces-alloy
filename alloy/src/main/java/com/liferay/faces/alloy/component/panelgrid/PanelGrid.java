@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.panelgrid;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = PanelGrid.COMPONENT_TYPE)
+@ConsumerType
 public class PanelGrid extends PanelGridBase {
 	// Initial Generation
 }

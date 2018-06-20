@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.icon;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Icon.COMPONENT_TYPE)
+@ConsumerType
 public class Icon extends IconBase {
 	// Initial Generation
 }

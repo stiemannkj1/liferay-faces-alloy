@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.link;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Link.COMPONENT_TYPE)
+@ConsumerType
 public class Link extends LinkBase {
 	// Initial Generation
 }

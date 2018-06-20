@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.head;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Head.COMPONENT_TYPE)
+@ConsumerType
 public class Head extends HeadBase {
 	// Initial Generation
 }

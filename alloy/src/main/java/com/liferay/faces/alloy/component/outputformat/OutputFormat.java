@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.outputformat;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = OutputFormat.COMPONENT_TYPE)
+@ConsumerType
 public class OutputFormat extends OutputFormatBase {
 	// Initial Generation
 }

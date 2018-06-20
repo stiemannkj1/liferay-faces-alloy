@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.outputscript;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = OutputScript.COMPONENT_TYPE)
+@ConsumerType
 public class OutputScript extends OutputScriptBase {
 	// Initial Generation
 }

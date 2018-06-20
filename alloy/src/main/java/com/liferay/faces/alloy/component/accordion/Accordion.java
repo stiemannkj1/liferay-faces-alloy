@@ -27,6 +27,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 import javax.faces.event.FacesEvent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.alloy.component.tab.Tab;
 import com.liferay.faces.alloy.component.tab.TabCollapseEvent;
 import com.liferay.faces.alloy.component.tab.TabExpandEvent;
@@ -38,6 +40,7 @@ import com.liferay.faces.util.helper.IntegerHelper;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Accordion.COMPONENT_TYPE)
+@ConsumerType
 public class Accordion extends AccordionBase implements ClientBehaviorHolder {
 
 	// Private Constants

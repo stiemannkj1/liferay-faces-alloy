@@ -15,10 +15,13 @@ package com.liferay.faces.alloy.component.selectrating;
 
 import javax.faces.context.FacesContext;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
+@ConsumerType
 public abstract class SelectRating extends SelectRatingBase {
 
 	@Override

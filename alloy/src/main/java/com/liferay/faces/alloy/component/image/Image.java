@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.image;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Image.COMPONENT_TYPE)
+@ConsumerType
 public class Image extends ImageBase {
 	// Initial Generation
 }

@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.selectbooleancheckbox;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectBooleanCheckbox.COMPONENT_TYPE)
+@ConsumerType
 public class SelectBooleanCheckbox extends SelectBooleanCheckboxBase {
 	// Initial Generation
 }

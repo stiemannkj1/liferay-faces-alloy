@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.fieldset;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Fieldset.COMPONENT_TYPE)
+@ConsumerType
 public class Fieldset extends FieldsetBase {
 	// Initial Generation
 }

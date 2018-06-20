@@ -13,9 +13,13 @@
  */
 package com.liferay.faces.alloy.component.panelgroup;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
+
 /**
  * @author  Neil Griffin
  */
+@ConsumerType
 public class PanelGroupBlockLayout extends PanelGroupBase {
 
 	@Override

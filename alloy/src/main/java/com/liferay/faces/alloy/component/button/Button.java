@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.button;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Button.COMPONENT_TYPE)
+@ConsumerType
 public class Button extends ButtonBase {
 
 	@Override

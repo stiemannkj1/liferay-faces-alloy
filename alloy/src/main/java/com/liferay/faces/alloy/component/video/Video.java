@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.video;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Video.COMPONENT_TYPE)
+@ConsumerType
 public class Video extends VideoBase {
 	// Initial Generation
 }

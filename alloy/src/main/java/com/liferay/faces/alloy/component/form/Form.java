@@ -15,12 +15,15 @@ package com.liferay.faces.alloy.component.form;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Bruno Basto
  * @author  Kyle Stiemann
  */
 @FacesComponent(value = Form.COMPONENT_TYPE)
+@ConsumerType
 public class Form extends FormBase {
 	// Initial Generation
 }

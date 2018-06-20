@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.message;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Message.COMPONENT_TYPE)
+@ConsumerType
 public class Message extends MessageBase {
 	// Initial Generation
 }

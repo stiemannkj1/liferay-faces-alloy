@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.selectmanymenu;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = SelectManyMenu.COMPONENT_TYPE)
+@ConsumerType
 public class SelectManyMenu extends SelectManyMenuBase {
 	// Initial Generation
 }

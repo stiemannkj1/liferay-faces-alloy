@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.datalist;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = DataList.COMPONENT_TYPE)
+@ConsumerType
 public class DataList extends DataListBase {
 	// Initial Generation
 }

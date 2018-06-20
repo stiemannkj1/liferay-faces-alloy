@@ -17,6 +17,8 @@ import javax.faces.component.FacesComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.event.PhaseId;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 import com.liferay.faces.util.component.ComponentUtil;
 
 
@@ -24,6 +26,7 @@ import com.liferay.faces.util.component.ComponentUtil;
  * @author  Vernon Singleton
  */
 @FacesComponent(value = InputHidden.COMPONENT_TYPE)
+@ConsumerType
 public class InputHidden extends InputHiddenBase {
 
 	public String getLabel() {

@@ -22,11 +22,14 @@ import javax.faces.component.UIComponent;
 import javax.faces.component.UIData;
 import javax.faces.component.behavior.ClientBehaviorHolder;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Neil Griffin
  */
 @FacesComponent(value = Paginator.COMPONENT_TYPE)
+@ConsumerType
 public class Paginator extends PaginatorBase implements ClientBehaviorHolder {
 
 	// Private Constants

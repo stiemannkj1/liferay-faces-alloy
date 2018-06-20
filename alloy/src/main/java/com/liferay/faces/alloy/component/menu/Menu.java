@@ -15,11 +15,14 @@ package com.liferay.faces.alloy.component.menu;
 
 import javax.faces.component.FacesComponent;
 
+import org.osgi.annotation.versioning.ConsumerType;
+
 
 /**
  * @author  Vernon Singleton
  */
 @FacesComponent(value = Menu.COMPONENT_TYPE)
+@ConsumerType
 public class Menu extends MenuBase {
 	// Initial Generation
 }
