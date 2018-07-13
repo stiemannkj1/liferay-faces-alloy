@@ -111,10 +111,15 @@ public class LoadConstants extends TagHandler {
 		else {
 
 			Map<String, Object> constantMap = new HashMap<String, Object>();
+			ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+
+			if (classLoader == null) {
+				classLoader = getClass().getClassLoader();
+			}
 
 			try {
 
-				Class<?> clazz = Class.forName(classType);
+				Class<?> clazz = Class.forName(classType, true, classLoader);
 				Field[] fields = clazz.getFields();
 
 				for (Field field : fields) {
